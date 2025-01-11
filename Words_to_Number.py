@@ -102,8 +102,6 @@ for i in range(0,len(lf)):
         lf[i] = 100000
     elif lf[i] == "crore":
         lf[i] = 10000000
-print(l)
-print(lf)
 i = 0
 while i < len(lf)-1:
     if len(lf) == 2:
@@ -121,8 +119,6 @@ while i < len(lf)-1:
                 del l[i+1]
                 del lf[i + 1]
             else: i+=1    
-print(l)
-print(lf)
 i=0
 while i < len(l):
     if i+1<len(l) and l[i] == 'hundred':
@@ -136,9 +132,12 @@ while i < len(l):
                 del l[i]
                 del lf[i]
     i+=1
-print(l)
-print(lf)
 if len(lf) == 1: lt = lf[0]
+if len(lf) == 2:
+    if any(isinstance(b,str) for b in l):
+        lt = lf[0]*lf[1]
+    else:
+        lt = lf[0]+lf[1]
 if len(lf) > 2:
     ts = 0
     o = 0
