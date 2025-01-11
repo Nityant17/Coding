@@ -108,10 +108,33 @@ for i in range(0,len(lf)):
     if lf[i] == 1000000:
         lt = lf[i-1]*1000000
 ln = [d for d in str(lt)]
+cn = 1
+li = []
 if c == "west":
-    for i in range(0,len(ln)):
-        if i%3 == 0:
-            print(ln[i],end="," if (i+3) < len(ln) else "")
+    for i in range(len(ln)-1,-1,-1):
+        if cn%3 == 0:
+            li.append(i)
+            cn+=1
         else:
-            print(ln[i],end="")
+            cn+=1
 elif c == "ind":
+    for i in range(len(ln)-1,-1,-1):
+        if cn == 3:
+            li.append(i)
+            cn = 5
+        elif (cn%2 == 0 and cn>3):
+            li.append(i)
+            cn+=1
+        else:
+            cn+=1
+li.sort()
+cnt=0
+for i in range(0,len(li)):
+    if li[i] != 0:
+        li[i]+=cnt
+        cnt+=1
+for i in li:
+    if i != 0:
+        ln.insert(i,",")
+for i in ln:
+    print(i,end="")
