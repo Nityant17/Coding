@@ -104,9 +104,53 @@ for i in range(0,len(lf)):
         lf[i] = 10000000
 print(l)
 print(lf)
-for i in range(0,len(lf)):
-    if lf[i] == 1000000:
-        lt = lf[i-1]*1000000
+i = 0
+while i < len(lf)-1:
+    if len(lf) == 2:
+        if any(isinstance(b,str) for b in l):
+            lt = lf[0]*lf[1]
+            break
+        else:
+            lt = lf[0]+lf[1]
+            break
+    else:
+        if (i+1) < len(l):
+            if isinstance(l[i], int) and isinstance(l[i + 1], int):
+                l[i] += l[i+1]
+                lf[i] += lf[i + 1]
+                del l[i+1]
+                del lf[i + 1]
+            else: i+=1    
+print(l)
+print(lf)
+i=0
+while i < len(l):
+    if i+1<len(l) and l[i] == 'hundred':
+        l[i-1]*=100
+        lf[i-1]*=100
+        del l[i]
+        del lf[i]
+        if isinstance(l[i-1], int) and isinstance(l[i], int):
+                l[i-1] += l[i]
+                lf[i-1] += lf[i]
+                del l[i]
+                del lf[i]
+    i+=1
+print(l)
+print(lf)
+if len(lf) == 1: lt = lf[0]
+if len(lf) > 2:
+    ts = 0
+    o = 0
+    while o < len(l):
+        ifl=l[o]
+        o+=1
+        pd = 1*ifl
+        while o < len(l) and isinstance(l[o],str):
+            pd*=lf[o]
+            o+=1
+        ts+=pd
+    lt=ts
 ln = [d for d in str(lt)]
 cn = 1
 li = []
@@ -138,3 +182,4 @@ for i in li:
         ln.insert(i,",")
 for i in ln:
     print(i,end="")
+    
